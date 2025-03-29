@@ -6,6 +6,7 @@
 	"version": "0.0.1",
 	"scripts": {
 		"check": "astro check",
+		"commit": "cz",
 		"postinstall": "astro sync",
 		"dev": "astro dev",
 		"format": "prettier --write .",
@@ -28,9 +29,14 @@
 		"tailwindcss": "^4.0.17"
 	},
 	"devDependencies": {
+		"@commitlint/cli": "^19.8.0",
+		"@commitlint/types": "^19.8.0",
 		"@eslint/js": "^9.23.0",
 		"@typescript-eslint/eslint-plugin": "^8.28.0",
 		"@typescript-eslint/parser": "^8.28.0",
+		"commitizen": "^4.3.1",
+		"commitlint-config-gitmoji": "^2.3.1",
+		"cz-emoji-conventional": "^1.2.1",
 		"eslint": "^9.23.0",
 		"eslint-config-prettier": "^10.1.1",
 		"eslint-import-resolver-typescript": "^4.3.1",
@@ -48,6 +54,12 @@
 		"prettier-plugin-tailwindcss": "^0.6.11",
 		"typescript": "^5.8.2",
 		"typescript-eslint": "^8.28.0"
+	},
+	"config": {
+		"commitizen": {
+			"path": "node_modules/cz-emoji-conventional",
+			"useGitmojis": true
+		}
 	},
 	"engines": {
 		"node": ">=22.14.0"
