@@ -48,11 +48,12 @@ export default [
 	},
 	{
 		files: ["**/*.{ts,tsx}"],
-		extends: [
-			importPlugin.flatConfigs.recommended,
-			importPlugin.flatConfigs.typescript,
-		],
+		plugins: {
+			import: importPlugin,
+		},
 		rules: {
+			...importPlugin.flatConfigs.recommended.rules,
+			...importPlugin.flatConfigs.typescript.rules,
 			"import/default": "off",
 			"import/named": "off",
 			"import/namespace": "off",
