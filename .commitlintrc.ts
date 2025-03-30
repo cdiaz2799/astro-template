@@ -1,6 +1,6 @@
 import type { UserConfig } from "@commitlint/types";
 
-const Configuration = {
+const Configuration: UserConfig = {
 	extends: ["gitmoji"],
 };
 
