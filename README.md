@@ -1,48 +1,75 @@
-# Astro Starter Kit: Basics
+# Astro Template
+
+## ✨ Features
+
+- 🚀 [Astro](https://astro.build) - The web framework for content-driven websites
+- ⚛️ [React](https://react.dev) - For interactive UI components
+- 📘 [TypeScript](https://www.typescriptlang.org) - For type safety and better developer experience
+- 🎨 [TailwindCSS](https://tailwindcss.com) - For utility-first CSS
+- 🔍 [ESLint](https://eslint.org) - For code linting
+- 💅 [Prettier](https://prettier.io) - For code formatting
+- 📝 [Commitizen](https://commitizen.github.io/cz-cli) - For standardized commit messages
+
+## 🚀 Quick Start
 
 ```sh
-yarn create astro@latest -- --template basics
+# Clone the repository
+git clone https://github.com/cdiaz2799/astro-template.git
+
+# Install dependencies
+yarn install
+
+# Start the development server
+yarn dev
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+## 🛠️ Development
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+All commands are run from the root of the project:
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+| Command          | Action                                       |
+| :--------------- | :------------------------------------------- |
+| `yarn dev`       | Starts local dev server at `localhost:4321`  |
+| `yarn build`     | Build your production site to `./dist/`      |
+| `yarn preview`   | Preview your build locally, before deploying |
+| `yarn format`    | Format code with Prettier                    |
+| `yarn lint`      | Lint code with ESLint                        |
+| `yarn typecheck` | Run TypeScript type checking                 |
+| `yarn commit`    | Create a commit with commitizen              |
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+## 📁 Project Structure
 
 ```text
 /
-├── public/
-│   └── favicon.svg
+├── public/             # Static assets
 ├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── components/     # React and Astro components
+│   ├── layouts/        # Page layouts
+│   └── pages/         # Pages and routes
+├── .eslintrc.js       # ESLint configuration
+├── .prettierrc        # Prettier configuration
+├── astro.config.mjs   # Astro configuration
+├── tailwind.config.mjs # TailwindCSS configuration
+└── tsconfig.json      # TypeScript configuration
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 🔧 Configuration
 
-## 🧞 Commands
+### Commit Messages
 
-All commands are run from the root of the project, from a terminal:
+This project uses [commitizen](https://commitizen.github.io/cz-cli) with [gitmoji](https://gitmoji.dev) for standardized commit messages. When making a commit, use:
 
-| Command                | Action                                           |
-| :--------------------- | :----------------------------------------------- |
-| `yarn install`         | Installs dependencies                            |
-| `yarn dev`             | Starts local dev server at `localhost:4321`      |
-| `yarn build`           | Build your production site to `./dist/`          |
-| `yarn preview`         | Preview your build locally, before deploying     |
-| `yarn astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `yarn astro -- --help` | Get help using the Astro CLI                     |
+```sh
+yarn commit
+```
 
-## 👀 Want to learn more?
+### Code Style
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- ESLint is configured with TypeScript support and various plugins for code quality
+- Prettier is set up for consistent code formatting
+- TailwindCSS is configured with the official plugin for class sorting
+
+## 📦 Dependencies
+
+- Node.js >= 22.14.0
+- Yarn package manager
