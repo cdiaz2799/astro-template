@@ -1,80 +1,98 @@
-import pluginJavaScript from "@eslint/js";
-import pluginAstro from "eslint-plugin-astro";
-import importPlugin from "eslint-plugin-import";
-import json from "eslint-plugin-json";
-import pluginReactA11y from "eslint-plugin-jsx-a11y";
-import prettierPlugin from "eslint-plugin-prettier";
-import pluginReact from "eslint-plugin-react";
+// @ts-check
+
+import eslint from "@eslint/js";
+import eslintConfigPrettier from "eslint-config-prettier/flat";
+import eslintPluginAstro from "eslint-plugin-astro";
+import jsxA11y from "eslint-plugin-jsx-a11y";
+import reactPlugin from "eslint-plugin-react";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 import sonarjs from "eslint-plugin-sonarjs";
-import globals from "globals";
-import pluginTypeScript from "typescript-eslint";
+import tseslint from "typescript-eslint";
 
-/** @type {import('eslint').Linter.Config[]} */
-export default [
+export default tseslint.config(
+	{
+		ignores: [
+			"node_modules/**",
+			"dist/**",
+			".astro/**",
+			".vscode/**",
+			"public/**",
+		],
+	},
+	eslint.configs.recommended,
+	tseslint.configs.strictTypeChecked,
+	tseslint.configs.stylisticTypeChecked,
 	{
 		languageOptions: {
-			globals: {
-				...globals.node,
+			parserOptions: {
+				project: true,
+				tsconfigRootDir: import.meta.dirname,
 			},
 		},
 	},
-	pluginJavaScript.configs.recommended,
-	...pluginTypeScript.configs.recommended,
-	...pluginTypeScript.configs.stylistic,
-	...pluginAstro.configs.recommended,
-	...pluginAstro.configs["jsx-a11y-recommended"],
-	sonarjs.configs.recommended,
 	{
-		files: ["**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}"],
-		...pluginReact.configs.flat.recommended,
-		...pluginReactA11y.flatConfigs.recommended,
-		...pluginReact.configs.flat["jsx-runtime"],
-		...importPlugin.flatConfigs.recommended,
+		files: [".*.mjs"],
+		languageOptions: {
+			parserOptions: {
+				project: true,
+				allowDefaultProject: true,
+			},
+		},
+	},
+	// Override for Astro files to avoid projectService error
+	{
+		files: ["**/*.astro"],
+		languageOptions: {
+			parserOptions: {
+				project: true,
+				tsconfigRootDir: import.meta.dirname,
+			},
+		},
+	},
+	// Standard TypeScript files can use projectService
+	{
+		files: ["**/*.{ts,tsx,js,jsx,mjs,cjs}"],
+		languageOptions: {
+			parserOptions: {
+				projectService: true,
+				tsconfigRootDir: import.meta.dirname,
+			},
+		},
+	},
+	eslintConfigPrettier,
+	sonarjs.configs.recommended,
+	...eslintPluginAstro.configs["flat/jsx-a11y-strict"],
+	{
+		extends: [reactPlugin.configs.flat.recommended],
+		files: ["**/*.{jsx,tsx,mjsx,cjsx}"],
+		plugins: {
+			react: reactPlugin,
+			"jsx-a11y": jsxA11y,
+		},
+		rules: {
+			"react/jsx-filename-extension": "off",
+			"react/react-in-jsx-scope": "off",
+			"react/jsx-fragments": "off",
+			"react/jsx-props-no-spreading": "off",
+			"react/jsx-sort-props": "error",
+			"react/require-default-props": "off",
+			"react/sort-prop-types": "error",
+			"react/state-in-constructor": "off",
+			"react/static-property-placement": "off",
+		},
+		settings: {
+			react: {
+				version: "detect",
+			},
+		},
+	},
+	{
 		plugins: {
 			"simple-import-sort": simpleImportSort,
-			import: importPlugin,
-			prettier: prettierPlugin,
 		},
 		rules: {
 			"simple-import-sort/imports": "error",
 			"simple-import-sort/exports": "error",
-			"import/default": "off",
-			"import/named": "off",
-			"import/namespace": "off",
-			"import/prefer-default-export": "off",
-			"prettier/prettier": "error",
 		},
 	},
-	{
-		files: ["**/*.{ts,tsx}"],
-		plugins: {
-			import: importPlugin,
-		},
-		rules: {
-			...importPlugin.flatConfigs.recommended.rules,
-			...importPlugin.flatConfigs.typescript.rules,
-			"import/default": "off",
-			"import/named": "off",
-			"import/namespace": "off",
-			"import/prefer-default-export": "off",
-		},
-	},
-	{
-		ignores: [".astro/", "dist/", ".github/"],
-	},
-	{
-		rules: {
-			"no-var": "error",
-			"@typescript-eslint/no-explicit-any": "off",
-			"@typescript-eslint/no-unused-vars": [
-				"error",
-				{ ignoreRestSiblings: true },
-			],
-		},
-	},
-	{
-		files: ["**/*.json"],
-		...json.configs["recommended"],
-	},
-];
+);

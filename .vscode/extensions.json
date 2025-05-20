@@ -3,7 +3,8 @@
 		"astro-build.astro-vscode",
 		"dbaeumer.vscode-eslint",
 		"bradlc.vscode-tailwindcss",
-		"redhat.vscode-yaml"
+		"redhat.vscode-yaml",
+		"esbenp.prettier-vscode"
 	],
 	"unwantedRecommendations": []
 }
